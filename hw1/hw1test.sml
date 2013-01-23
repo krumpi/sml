@@ -24,3 +24,5 @@ val test_number_in_months_4=number_in_months([(2011,1,1), (2011,1,3), (2011,4,1)
 val test_number_in_months_5=number_in_months([(2011,1,1), (2011,1,3), (2011,4,1)], [1, 4])=3
 val test_number_in_months_6=number_in_months([(2011,4,1), (2011,1,3), (2011,4,1)], [4])=2
 val test_number_in_months_7=number_in_months([(2011,8,1), (2011,1,3), (2011,4,1)], [4, 8, 1])=3
+
+val test_date_in_month_1=dates_in_month([(2011,8,1), (2011,1,3), (2011,4,1)], [])=[]
