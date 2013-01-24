@@ -40,4 +40,7 @@ val test_get_nth_1=get_nth(["abc"], 1)="abc"
 val test_get_nth_2=get_nth(["abc", "dc"], 1)="abc"
 val test_get_nth_3=get_nth(["abc", "dc"], 2)="dc"
 val test_get_nth_4=get_nth(["dc", "ef", "gh"], 3)="gh"
-(*val test_get_nth_2=get_nth([], 0)*)
+
+val test_date_to_string_1=date_to_string((2011, 8, 7))="August 7, 2011"
+val test_date_to_string_2=date_to_string((~2011, 8, 7))="August 7, ~2011"
+val test_date_to_string_3=date_to_string((1973, 7, 9))="July 9, 1973"

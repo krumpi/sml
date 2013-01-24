@@ -37,3 +37,10 @@ fun get_nth(s: string list, n: int) =
   if n = 1
   then hd s
   else get_nth(tl s, n - 1)
+
+fun date_to_string(d: int * int * int) =
+  let
+    val months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  in
+    get_nth(months, #2 d) ^ " " ^ Int.toString(#3 d) ^ ", " ^ Int.toString(#1 d)
+  end
