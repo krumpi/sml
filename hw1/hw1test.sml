@@ -29,3 +29,15 @@ val test_date_in_month_1=dates_in_month([], 1)=[]
 val test_date_in_month_2=dates_in_month([(2011,8,1), (2011,1,3), (2011,4,1)], 1)=[(2011,1,3)]
 val test_date_in_month_3=dates_in_month([(2011,8,1), (2011,1,3), (2011,4,1)], 5)=[]
 val test_date_in_month_4=dates_in_month([(2011,4,1), (2011,1,3), (2011,4,1)], 4)=[(2011,4,1), (2011,4,1)]
+
+val test_dates_in_month_1=dates_in_months([], [])=[]
+val test_dates_in_month_2=dates_in_months([], [1])=[]
+val test_dates_in_month_3=dates_in_months([(2011,8,1), (2011,1,3), (2011,4,1)], [1])=[(2011,1,3)]
+val test_dates_in_month_4=dates_in_months([(2011,8,1), (2011,1,3), (2011,4,1)], [5])=[]
+val test_dates_in_month_5=dates_in_months([(2011,4,1), (2011,1,3), (2011,4,8)], [4, 1])=[(2011,4,1), (2011,4,8), (2011,1,3)]
+
+val test_get_nth_1=get_nth(["abc"], 1)="abc"
+val test_get_nth_2=get_nth(["abc", "dc"], 1)="abc"
+val test_get_nth_3=get_nth(["abc", "dc"], 2)="dc"
+val test_get_nth_4=get_nth(["dc", "ef", "gh"], 3)="gh"
+(*val test_get_nth_2=get_nth([], 0)*)

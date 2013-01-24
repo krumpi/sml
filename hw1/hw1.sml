@@ -27,3 +27,13 @@ fun dates_in_month(l: (int * int * int) list, m: int) =
   if null l
   then []
   else if in_month(hd l, m) = 1 then hd l :: dates_in_month(tl l, m) else dates_in_month(tl l, m)
+
+fun dates_in_months(l: (int * int * int) list, m: int list) =
+  if null m
+  then []
+  else dates_in_month(l, hd m) @ dates_in_months(l, tl m)
+
+fun get_nth(s: string list, n: int) =
+  if n = 1
+  then hd s
+  else get_nth(tl s, n - 1)
