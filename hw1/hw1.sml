@@ -26,4 +26,4 @@ fun number_in_months(l: (int * int * int) list, m: int list) =
 fun dates_in_month(l: (int * int * int) list, m: int) =
   if null l
   then []
-  else (if in_month(hd l, m) = 1 then hd l else []) :: dates_in_month(tl l, m)
+  else if in_month(hd l, m) = 1 then hd l :: dates_in_month(tl l, m) else dates_in_month(tl l, m)
