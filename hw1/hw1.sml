@@ -71,3 +71,17 @@ fun month_range(day1: int, day2: int) =
   in
     add_day([], day2)
   end
+
+fun oldest(dates: (int * int * int) list) = 
+  let
+    fun oldest_internal(ans: (int * int * int) option, d: (int * int * int) list) =
+      if null d
+      then ans
+      else if is_older(hd d, valOf ans)
+        then oldest_internal(SOME(hd d), tl d)
+        else oldest_internal(ans, tl d)
+  in
+    if null dates
+    then NONE
+    else oldest_internal(SOME(hd dates), tl dates)
+  end

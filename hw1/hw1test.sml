@@ -117,19 +117,15 @@ val test_month_range_4=month_range(304,305)=[10,11];
     val check95 = what_month (60)=3;
 
     val check101= month_range(29,34)=[1,1,1,2,2,2];
-    val a= month_range(29,34);
     val check102= month_range(20,19)=[];
-    val b= month_range(20,19);
     val check103= month_range(101,101)=[4];
-    val b= month_range(101,101);
     val check104= month_range(304,305)=[10,11];
-    val b= month_range(304,305);
 
-    (*val check111= oldest([])=NONE;
+    val check111= oldest([])=NONE;
     val check112= oldest([d2])=SOME(d2);
     val check113= oldest(ds)=SOME(d4);
 
-    val check121= number_in_months_challenge(ds,ms1)=number_in_months(ds,ms1);
+    (*val check121= number_in_months_challenge(ds,ms1)=number_in_months(ds,ms1);
     val check122= number_in_months_challenge(ds,ms2)=number_in_months(ds,ms2);
     val check123= number_in_months_challenge(ds,ms3)=number_in_months(ds,ms3);
     val check124= number_in_months_challenge(ds,ms1@ms1)=number_in_months(ds,ms1);
