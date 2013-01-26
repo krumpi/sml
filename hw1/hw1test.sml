@@ -50,6 +50,11 @@ val test_number_before_reaching_sum_2=number_before_reaching_sum(5, [5,6,1,2]) =
 val test_number_before_reaching_sum_3=number_before_reaching_sum(13,[5,6,1,2]) = 3
 val test_number_before_reaching_sum_4=number_before_reaching_sum(12,[5,6,1,2]) = 2
 
+val test_what_month_1=what_month(1) = 1
+val test_what_month_2=what_month(31) = 1
+val test_what_month_3=what_month(150) = 5
+val test_what_month_4=what_month(365) = 12
+
  val d1 = (1983,5,28);
     val d2 = (1983,9,12);
     val d3 = (1983,9,10);
@@ -99,13 +104,13 @@ val test_number_before_reaching_sum_4=number_before_reaching_sum(12,[5,6,1,2]) =
     val check83 = number_before_reaching_sum (21, numbers)=4;
     val check84 = number_before_reaching_sum (1, numbers)=0;
 
-    (*val check91 = what_month (10)=1;
+    val check91 = what_month (10)=1;
     val check92 = what_month (360)=12;
     val check93 = what_month (150)=5;
     val check94 = what_month (290)=10;
     val check95 = what_month (60)=3;
 
-    val check101= month_range(29,34)=[1,1,1,2,2,2];
+    (*val check101= month_range(29,34)=[1,1,1,2,2,2];
     val check102= month_range(20,19)=[];
     val check103= month_range(101,101)=[4];
     val check104= month_range(304,305)=[10,11];

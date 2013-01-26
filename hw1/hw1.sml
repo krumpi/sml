@@ -54,3 +54,10 @@ fun number_before_reaching_sum(sum: int, l: int list) =
   in
     number_before_reaching_sum_internal(sum, l)
   end
+
+fun what_month(day: int) =
+  let
+    val month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  in
+    number_before_reaching_sum(day, month_days) + 1
+  end
