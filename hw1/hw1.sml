@@ -44,3 +44,13 @@ fun date_to_string(d: int * int * int) =
   in
     get_nth(months, #2 d) ^ " " ^ Int.toString(#3 d) ^ ", " ^ Int.toString(#1 d)
   end
+
+fun number_before_reaching_sum(sum: int, l: int list) =
+  let
+    fun number_before_reaching_sum_internal(acc: int, p: int list) =
+      if acc <= 0
+      then length l - length p - 1
+      else number_before_reaching_sum_internal(acc - hd p, tl p)
+  in
+    number_before_reaching_sum_internal(sum, l)
+  end
