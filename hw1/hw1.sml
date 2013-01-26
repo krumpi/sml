@@ -61,3 +61,13 @@ fun what_month(day: int) =
   in
     number_before_reaching_sum(day, month_days) + 1
   end
+
+fun month_range(day1: int, day2: int) =
+  let
+    fun add_day(ans: int list, d: int) =
+      if d < day1
+      then ans
+      else add_day(what_month(d) :: ans, d - 1)
+  in
+    add_day([], day2)
+  end
