@@ -125,14 +125,18 @@ val test_month_range_4=month_range(304,305)=[10,11];
     val check112= oldest([d2])=SOME(d2);
     val check113= oldest(ds)=SOME(d4);
 
-    (*val check121= number_in_months_challenge(ds,ms1)=number_in_months(ds,ms1);
+val a = ds
+val b = ms1
+val c=remove_duplicates(ds, [])
+
+    val check121= number_in_months_challenge(ds,ms1)=number_in_months(ds,ms1);
     val check122= number_in_months_challenge(ds,ms2)=number_in_months(ds,ms2);
     val check123= number_in_months_challenge(ds,ms3)=number_in_months(ds,ms3);
     val check124= number_in_months_challenge(ds,ms1@ms1)=number_in_months(ds,ms1);
     val check125= number_in_months_challenge(ds,ms2@ms2)=number_in_months(ds,ms2);
     val check126= number_in_months_challenge(ds,ms3@ms3)=number_in_months(ds,ms3);
 
-    val check127= dates_in_months_challenge(ds,ms1)=dates_in_months(ds,ms1);
+    (*val check127= dates_in_months_challenge(ds,ms1)=dates_in_months(ds,ms1);
     val check128= dates_in_months_challenge(ds,ms2)=dates_in_months(ds,ms2);
     val check129= dates_in_months_challenge(ds,ms3)=dates_in_months(ds,ms3);
     val check12A= dates_in_months_challenge(ds,ms4)=dates_in_months(ds,ms4);

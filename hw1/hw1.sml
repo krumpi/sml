@@ -85,3 +85,16 @@ fun oldest(dates: (int * int * int) list) =
     then NONE
     else oldest_internal(SOME(hd dates), tl dates)
   end
+
+fun in_list(l: (int * int * int) list, i: int * int * int) =
+  if null l
+  then false
+  else if #2 i = #2 (hd l) then true else in_list(tl l, i)
+
+fun remove_duplicates(l: (int * int * int) list, r: (int * int * int) list) =
+  if null l
+  then r
+  else if in_list(r, hd l) then remove_duplicates(tl l, r) else remove_duplicates(tl l, hd l :: r)
+
+fun number_in_months_challenge(l: (int * int * int) list, m: int list) =
+  number_in_months(remove_duplicates(l, []), m)
