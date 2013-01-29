@@ -16,7 +16,7 @@ fun all_except_option(s, sl) =
 fun get_substitutions1(sll, s) =
   case sll of
     [] => []
-  | x::xs => all_except_option(s, x) :: get_substitutions1(xs, s)
+  | x::xs => all_except_option(s, x) @ get_substitutions1(xs, s)
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
