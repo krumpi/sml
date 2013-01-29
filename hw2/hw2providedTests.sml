@@ -7,7 +7,14 @@
    so they will not type-check if officiate is not defined.
  *)
 
-fun provided_test1 () = (* correct behavior: raise IllegalMove *)
+val t11=all_except_option("1", []) = NONE
+val t12=all_except_option("1", ["1"]) = SOME([])
+val t13=all_except_option("1", ["1", "2", "3"]) = SOME(["2", "3"])
+val t14=all_except_option("1", ["2", "3"]) = NONE
+
+val t21=get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],"Fred") = ["Fredrick","Freddie", "F"]
+
+(*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
 	val moves = [Draw,Discard(Hearts,Jack)]
     in
@@ -20,3 +27,4 @@ fun provided_test2 () = (* correct behavior: return 3 *)
     in
  	officiate(cards,moves,42)
     end
+*)
