@@ -24,8 +24,21 @@ fun get_substitutions1(sll, s) =
   case sll of
     [] => []
   | x::xs => case all_except_option(s, x) of
-      NONE => get_substitutions1(xs, s)
+      NONE    => get_substitutions1(xs, s)
     | SOME(y) => y @ get_substitutions1(xs, s)
+
+fun get_substitutions2(sll, s) =
+  let
+    fun get_substitutions2_internal(acc, l) = 
+      case l of
+        [] => acc
+      | x::xs => case all_except_option(s, x) of
+          NONE    => get_substitutions2_internal(acc, xs)
+        | SOME(y) => get_substitutions2_internal(acc @ y, xs)
+
+  in
+    get_substitutions2_internal([], sll)
+  end
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
@@ -58,6 +71,9 @@ val t16=all_except_option("Fred", ["Freddie","Fred", "F"]) = SOME(["Freddie", "F
 
 val t21=get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],"Fred") = ["Fredrick","Freddie", "F"]
 val t22=get_substitutions1([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]],"Jeff") = ["Jeffrey","Geoff", "Jeffrey"]
+
+val t23=get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],"Fred") = ["Fredrick","Freddie", "F"]
+val t24=get_substitutions2([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]],"Jeff") = ["Jeffrey","Geoff", "Jeffrey"]
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
