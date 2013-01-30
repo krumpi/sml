@@ -40,6 +40,17 @@ fun get_substitutions2(sll, s) =
     get_substitutions2_internal([], sll)
   end
 
+fun similar_names(sll, full_name:{first:string, middle:string, last:string})=
+  let 
+    val s = get_substitutions1(sll, #first full_name)
+    fun acc_substitutions(acc, subs)=
+      case subs of
+          [] => acc
+        | x :: xs => acc_substitutions({first=x, middle=(#middle full_name), last=(#last full_name)} :: acc, xs)
+  in
+    full_name :: acc_substitutions([], s)
+  end
+
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
@@ -74,6 +85,13 @@ val t22=get_substitutions1([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jef
 
 val t23=get_substitutions2([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],"Fred") = ["Fredrick","Freddie", "F"]
 val t24=get_substitutions2([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]],"Jeff") = ["Jeffrey","Geoff", "Jeffrey"]
+
+val t31=similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+{first="Fred", middle="W", last="Smith"})=
+  [{first="Fred", last="Smith", middle="W"},
+  {first="F", last="Smith", middle="W"},
+  {first="Freddie", last="Smith", middle="W"},
+  {first="Fredrick", last="Smith", middle="W"}]
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
