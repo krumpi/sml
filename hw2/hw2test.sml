@@ -62,8 +62,13 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
-(* put your solutions for problem 2 here *)
 
+fun card_color(suit, rank)=
+  case suit of
+      Spades => Black
+    | Clubs => Black 
+    | Diamonds => Red
+    | Hearts => Red
 
 
 (* These are just two tests for problem 2; you will want more.
@@ -92,6 +97,11 @@ val t31=similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fre
   {first="F", last="Smith", middle="W"},
   {first="Freddie", last="Smith", middle="W"},
   {first="Fredrick", last="Smith", middle="W"}]
+
+val t41=card_color((Clubs, 1))=Black
+val t42=card_color((Spades, 1))=Black
+val t43=card_color((Diamonds, 1))=Red
+val t44=card_color((Hearts, 1))=Red
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
