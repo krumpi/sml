@@ -62,7 +62,6 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
-
 fun card_color(suit, rank)=
   case suit of
       Spades => Black
@@ -70,6 +69,23 @@ fun card_color(suit, rank)=
     | Diamonds => Red
     | Hearts => Red
 
+fun card_value(suit, rank)=
+  case rank of
+      Jack => 10
+    | Queen => 10
+    | King => 10
+    | Ace => 11
+    | Num x => x
+
+fun remove_card(cs, c, e)=
+  let
+    fun all_except_option_internal(acc, l) = 
+    case l of
+       [] => raise e
+     | h :: xs => if h = c then acc @ xs else all_except_option_internal(h :: acc, xs)
+  in
+    all_except_option_internal([], cs)
+  end
 
 (* These are just two tests for problem 2; you will want more.
 
@@ -102,6 +118,10 @@ val t41=card_color((Clubs, 1))=Black
 val t42=card_color((Spades, 1))=Black
 val t43=card_color((Diamonds, 1))=Red
 val t44=card_color((Hearts, 1))=Red
+
+val t51=remove_card([(Clubs, 1), (Spades, 1)], (Clubs, 1), IllegalMove)=[(Spades, 1)]
+val t52=remove_card([(Clubs, 1), (Spades, 1)], (Spades, 1), IllegalMove)=[(Clubs, 1)]
+val t53=remove_card([(Clubs, 1), (Spades, 1)], (Spades, 4), IllegalMove)=[] handle IllegalMove => true
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
