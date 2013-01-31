@@ -111,6 +111,23 @@ fun score(hc, g)=
     if all_same_color(hc) then ps div 2 else ps
   end
 
+(*val a = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],30)*)
+
+fun officiate(cs, moves, g)=
+  let
+    fun do_game(hc, rc, remaining_moves)=
+      case (remaining_moves, rc) of
+        (Discard c :: xs, _) => do_game(remove_card(hc, c, IllegalMove), rc, xs) (* Discard one from hc ad]nd go to the next move *)
+      | (Draw :: [], []) => score(hc, g) (* No more moves, calculate score *)
+      | (Draw :: [], y :: ys) => score(y :: hc, g) (* No more moves, calculate score *)
+      | (Draw :: xs, []) => score(hc, g) (* No more cards, terminate *)
+      | (Draw :: xs, y :: []) => score(y :: hc, g) (* No more cards, terminate *)
+      | (Draw :: xs, y :: ys) =>  if sum_cards(y :: hc) > g then score(y :: hc, g) else do_game(y :: hc, ys, xs)
+      | ([], _) => score(hc, g) (* No more moves *)
+  in
+    do_game([], cs, moves)
+  end
+
 (* These are just two tests for problem 2; you will want more.
 
    Naturally these tests and your tests will use bindings defined 
@@ -227,7 +244,7 @@ val testF6 = score(cards2,40)=6
 
 val testF7 = score([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],42)=3
 
-(*val testG0 = ( officiate([(Clubs,Jack),(Spades,Num(8))], [Draw,Discard(Hearts,Jack)] ,42) handle IllegalMove => 9999 ) = 9999
+val testG0 = ( officiate([(Clubs,Jack),(Spades,Num(8))], [Draw,Discard(Hearts,Jack)] ,42) handle IllegalMove => 9999 ) = 9999
 
 val testG1 = officiate([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)], [Draw,Draw,Draw,Draw,Draw],42)=3
 
@@ -241,6 +258,10 @@ val testG7 = officiate([(Clubs,Ace),(Hearts,Ace),(Clubs,Ace),(Spades,Ace)], [Dra
 val testG8 = officiate([(Clubs,Ace),(Spades,Ace),(Diamonds,Ace),(Spades,Ace)], [Draw,Draw,Draw,Draw,Draw],100)=56
 val testG9 = officiate([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw,Draw,Draw,Draw],44)=0
 
+val a = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],30)
+val b=score([(Clubs,Ace)], 30)
+val c=score([(Clubs,Ace), (Diamonds,Ace)], 30)
+val testG10 = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],30)=8
 val testG10 = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],30)=8
 val testG11 = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],22)=0
 val testG12 = officiate([(Clubs,Ace),(Diamonds,Ace),(Clubs,Ace),(Hearts,Ace)], [Draw,Draw],11)=33
@@ -255,9 +276,9 @@ val testG18 = officiate([(Clubs,Queen),(Diamonds,Ace),(Hearts,Ace),(Diamonds,Ace
 
 val testG19 = officiate([(Clubs,Queen),(Diamonds,Ace),(Hearts,Ace),(Diamonds,Ace)], [Draw,Draw,Discard(Clubs,Queen),Draw],11)=30
 val testG20 = officiate([(Clubs,Queen),(Diamonds,Ace),(Hearts,Ace),(Diamonds,Ace)], [Draw,Draw,Discard(Clubs,Queen),Draw],22)=0
-val testG21 = officiate([(Clubs,Queen),(Diamonds,Ace),(Hearts,Ace),(Diamonds,Ace)], [Draw,Draw,Discard(Clubs,Queen),Draw],30)=4*)
+val testG21 = officiate([(Clubs,Queen),(Diamonds,Ace),(Hearts,Ace),(Diamonds,Ace)], [Draw,Draw,Discard(Clubs,Queen),Draw],30)=4
 
-(*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
+fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
 	val moves = [Draw,Discard(Hearts,Jack)]
     in
@@ -270,4 +291,3 @@ fun provided_test2 () = (* correct behavior: return 3 *)
     in
  	officiate(cards,moves,42)
     end
-*)
