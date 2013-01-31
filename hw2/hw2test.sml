@@ -87,6 +87,12 @@ fun remove_card(cs, c, e)=
     all_except_option_internal([], cs)
   end
 
+fun all_same_color(cs)=
+  case cs of
+    [] => true
+  | x :: [] => true
+  | x :: y :: xs => (card_color(x)= card_color(x)) andalso all_same_color(xs)
+
 (* These are just two tests for problem 2; you will want more.
 
    Naturally these tests and your tests will use bindings defined 
@@ -122,6 +128,11 @@ val t44=card_color((Hearts, 1))=Red
 val t51=remove_card([(Clubs, 1), (Spades, 1)], (Clubs, 1), IllegalMove)=[(Spades, 1)]
 val t52=remove_card([(Clubs, 1), (Spades, 1)], (Spades, 1), IllegalMove)=[(Clubs, 1)]
 val t53=remove_card([(Clubs, 1), (Spades, 1)], (Spades, 4), IllegalMove)=[] handle IllegalMove => true
+
+val t61=all_same_color([])
+val t62=all_same_color([(Clubs, 1)])
+val t63=all_same_color([(Clubs, 1), (Spades, 1)])
+val t64=all_same_color([(Clubs, 1), (Hearts, 1)])
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
