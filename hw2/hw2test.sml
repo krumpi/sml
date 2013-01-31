@@ -93,6 +93,16 @@ fun all_same_color(cs)=
   | x :: [] => true
   | x :: y :: xs => (card_color(x)= card_color(x)) andalso all_same_color(xs)
 
+fun sum_cards(cs)=
+  let
+    fun sum_cards_internal(acc, l)=
+      case l of
+        [] => acc
+      | x::xs => sum_cards_internal(card_value(x) + acc, xs)
+  in
+    sum_cards_internal(0, cs)
+  end
+
 (* These are just two tests for problem 2; you will want more.
 
    Naturally these tests and your tests will use bindings defined 
@@ -133,6 +143,11 @@ val t61=all_same_color([])
 val t62=all_same_color([(Clubs, 1)])
 val t63=all_same_color([(Clubs, 1), (Spades, 1)])
 val t64=all_same_color([(Clubs, 1), (Hearts, 1)])
+
+val t71=sum_cards([])=0
+val t72=sum_cards([(Clubs, Num 1)])=1
+val t73=sum_cards([(Clubs, Num 1), (Spades, Num 1)])=2
+val t74=sum_cards([(Clubs, Num 1), (Hearts, Jack)])=11
 
 (*fun provided_test1 () = (* correct behavior: raise IllegalMove *)
     let val cards = [(Clubs,Jack),(Spades,Num(8))]
