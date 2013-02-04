@@ -105,3 +105,17 @@ val test5d = longest_capitalized([]) = ""
 (* Problem 6 *)
 val test6a = rev_string("Supercalifragilisticexpialidocious")="suoicodilaipxecitsiligarfilacrepuS"
 val test6b = rev_string("hello")="olleh"
+
+fun is_even x =
+    if x mod 2 = 0 then SOME([x]) else NONE
+
+val first_answer_test1 = first_answer is_even [1, 2, 3, 4, 5, 6] = [2];
+val first_answer_test2= (first_answer is_even [1, 3, 5] handle NoAnswer => [0]) = [0];
+val first_answer_test3 = first_answer is_even [1, 3, 5, 6] = [6];
+val first_answer_test4 = (first_answer is_even [] handle NoAnswer => [0]) = [0];
+
+(* Tests for all_answers *)
+
+(*val all_answers_test1 = all_answers is_even [1, 2, 3, 4, 5, 6] = NONE;
+val all_answers_test2 = all_answers is_even [2, 4, 6] = SOME ([2, 4, 6]);
+val all_answers_test3 = all_answers is_even [] = SOME ([]);*)
